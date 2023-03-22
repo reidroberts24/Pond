@@ -29,7 +29,8 @@ public class Fly {
     }
     public void setSpeed(double speed) {
         this.speed = speed;
-    }
+        }
+    
   // methods:
         // toString (Note: replace the values in brackets [] with the actual value. Do not include the double quotes “” or the square brackets [] in the output. Specify all decimal values to 2 decimal points.)
         // grow
@@ -42,25 +43,34 @@ public class Fly {
         }
     }
     public double grow(int addMass) {
-        double newMass = this.mass + addMass;
-        double newSpeed = 0;
-        if (newMass < 20) {
-            newSpeed = this.speed + addMass;
-        } else if (newMass >= 20) {
-            newSpeed = this.speed + (20 - this.mass) - (0.5 * (newMass - 20));
+        if (addMass == 0) {
+            return this.mass;
+        } else {
+            for (int i = 1; i <= addMass; i++) {
+                this.mass++;
+                if (this.mass < 20) {
+                    this.speed++;
+                } else if (this.mass >= 20) {
+                    this.speed-= 0.5;
+                }
+
+            }
         }
-        this.mass = newMass;
-        this.speed = newSpeed;
-        return newMass;
+        return this.mass;
     }
 
-
-
+    public Boolean isDead() {
+        if (this.mass == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     public static void main(String[] args) {
-        Fly fly1 = new Fly(0.5, 10);
-        Fly fly2 = new Fly(1.5, 8.0);
-        fly1.grow(30);
-        System.out.println(fly1);
+        Fly test = new Fly(30, 50);
+        test.grow(10);
+        System.out.println(test.toString());
     }
+
 }
